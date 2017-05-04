@@ -1,0 +1,103 @@
+
+" ==========================================
+" bundle 插件管理和配置
+" ==========================================
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+
+
+
+
+
+
+
+
+" -----------------------------------------------
+" 自己安装的插件
+" -----------------------------------------------
+" 主题
+Plugin 'tomasr/molokai'
+colorscheme molokai
+
+" 树形目录
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+autocmd vimenter * NERDTree		" 自动打开 vim
+map <C-n> :NERDTreeToggle<CR>		" 打开关闭 vim
+" o 打开关闭文件或目录
+" e 以文件管理的方式打开选中的目录
+" t 在标签页中打开
+" T 在标签页中打开，但光标仍然留在 NERDTree
+" r 刷新光标所在的目录
+" R 刷新当前根路径
+" I 显示隐藏文件
+" C 将根路径设置为光标所在的目录
+" u 设置上级目录为根路径
+" ctrl + w + w 光标自动在左右侧窗口切换
+" ctrl + w + r 移动当前窗口的布局位置
+" :tabc 关闭当前的 tab
+" :tabp   前一个 tab
+" :tabn   后一个 tab
+" gt      后一个 tab
+
+" 代码自动补全
+Plugin 'Valloric/YouCompleteMe'
+
+" 自动补全单引号，双引号
+Plugin 'Raimondi/delimitMate'
+
+" Vim Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'suan/vim-instant-markdown'
+let g:instant_markdown_slow = 1		" 保存后打开
+let g:instant_markdown_autostart = 0	" 默认不打开
+" :InstantMarkdownPreview 打开
+
+
+
+
+
+
+
+
+
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
