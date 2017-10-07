@@ -31,49 +31,140 @@ Plugin 'git://git.wincent.com/command-t.git'
 
 
 " -----------------------------------------------
-" 自己安装的插件
-" -----------------------------------------------
-" 主题
-Plugin 'tomasr/molokai'
-colorscheme molokai
-
 " 树形目录
+" -----------------------------------------------
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 autocmd vimenter * NERDTree		" 自动打开 vim
 map <C-n> :NERDTreeToggle<CR>		" 打开关闭 vim
-" o 打开关闭文件或目录
-" e 以文件管理的方式打开选中的目录
-" t 在标签页中打开
-" T 在标签页中打开，但光标仍然留在 NERDTree
-" r 刷新光标所在的目录
-" R 刷新当前根路径
-" I 显示隐藏文件
-" C 将根路径设置为光标所在的目录
-" u 设置上级目录为根路径
-" ctrl + w + w 光标自动在左右侧窗口切换
-" ctrl + w + r 移动当前窗口的布局位置
-" :tabc 关闭当前的 tab
-" :tabp   前一个 tab
-" :tabn   后一个 tab
-" gt      后一个 tab
 
-" 代码自动补全
+
+" -----------------------------------------------
+" 代码，引号自动补全
+" -----------------------------------------------
 Plugin 'Valloric/YouCompleteMe'
-
-" 自动补全单引号，双引号
 Plugin 'Raimondi/delimitMate'
 
+
+
+" -----------------------------------------------
+" 文件，代码搜索
+" -----------------------------------------------
+Plugin 'rking/ag.vim'
+Plugin 'kien/ctrlp.vim'
+
+
+
+" -----------------------------------------------
+" 加强版状态条
+" -----------------------------------------------
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='papercolor'
+
+
+
+" -----------------------------------------------
+" git
+" -----------------------------------------------
+Plugin 'airblade/vim-gitgutter'
+
+
+
+" -----------------------------------------------
 " Vim Markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" -----------------------------------------------
 Plugin 'suan/vim-instant-markdown'
 let g:instant_markdown_slow = 1		" 保存后打开
 let g:instant_markdown_autostart = 0	" 默认不打开
-" :InstantMarkdownPreview 打开
 
 
 
+" -----------------------------------------------
+" 代码注释
+" -----------------------------------------------
+Plugin 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1	" 注释符号与注释内容之间空一格
+let g:NERDDefaultAlign = 'left'	" 注释向左对齐
+" 自定义注释格式
+let g:NERDCustomDelimiters = {
+			\ 'javascript': { 'left': '//', 'leftAlt': '/**', 'rightAlt': '*/' },
+			\ 'less': { 'left': '/**', 'right': '*/' }
+		\ }
+
+
+
+" -----------------------------------------------
+" html5
+" -----------------------------------------------
+Plugin 'othree/html5.vim'
+
+
+
+" -----------------------------------------------
+" css3
+" -----------------------------------------------
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'ap/vim-css-color'
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
+
+
+
+" -----------------------------------------------
+" JavaScript
+" -----------------------------------------------
+Plugin 'pangloss/vim-javascript'
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+set foldmethod=syntax
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+let g:javascript_conceal_noarg_arrow_function = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
+set conceallevel=1
+
+
+
+" -----------------------------------------------
+" React
+" -----------------------------------------------
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
+
+
+" -----------------------------------------------
+" Emmet
+" -----------------------------------------------
+Plugin 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+ 		\ 'javascript.jsx' : {
+    		\ 'extends' : 'jsx',
+    	\ },
+ 		\ }
+
+
+
+
+" -----------------------------------------------
+" polyglot
+" -----------------------------------------------
+Plugin 'sheerun/vim-polyglot'
 
 
 
