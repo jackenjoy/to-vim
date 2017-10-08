@@ -95,14 +95,22 @@ vimtutor  // vim 教程
 # :!shell 执行外部命令
 ```
 
-# 配置
+# .vimrc
 ```
 cd Home               // 进入 Home 目录
 touch .vimrc          // 配置文件
-touch .vimrc.bundles  // 插件管理文件
+
+# Unix
+# vim-plug
+# Vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-## .vimrc
+## 基本配置
 ### `取消备份`
 ```
 set nobackup
@@ -159,22 +167,31 @@ colorscheme solarized
 - [altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)
 - [Anthony25/gnome-terminal-colors-solarized](https://github.com/Anthony25/gnome-terminal-colors-solarized)
 
-## .vimrc.bundles
-```
-# 使用 vunble 管理插件
-$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
+## 插件配置
 ### `树形目录`
 ```
-Plugin 'scrooloose/nerdtree'			" tree
-Plugin 'jistr/vim-nerdtree-tabs'		" tab
-Plugin 'Xuyuanp/nerdtree-git-plugin'	" git
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
-# 自动打开 vim
 autocmd vimenter * NERDTree
-# 打开关闭 vim
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let g:NERDTreeShowIgnoredStatus = 1
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
 # o 打开关闭文件或目录
 # e 以文件管理的方式打开选中的目录
 # t 在标签页中打开
@@ -194,12 +211,14 @@ map <C-n> :NERDTreeToggle<CR>
 # gt      后一个 tab
 ```
 - [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
+- [vim-nerdtree-tabs](https://github.com/jistr/vim-nerdtree-tabs)
+- [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin)
 
 ### `代码，引号，路径自动补全`
 ```
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Valloric/YouCompleteMe'
+Plug 'Raimondi/delimitMate'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 ```
 - [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 - [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
@@ -207,11 +226,12 @@ Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 ### `语法高亮，检查`
 ```
-Plugin 'sheerun/vim-polyglot'
-Plugin 'w0rp/ale', {
+Plug 'sheerun/vim-polyglot'
+Plug 'w0rp/ale', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
 \ }
+
 let g:ale_fixers = {
 \	'javascript': ['eslint'],
 \}
@@ -224,8 +244,8 @@ let g:ale_sign_warning = '▶'
 
 ### `文件，代码搜索`
 ```
-Plugin 'rking/ag.vim'
-Plugin 'kien/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'kien/ctrlp.vim'
 ```
 - [kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
 - [ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
@@ -233,10 +253,9 @@ Plugin 'kien/ctrlp.vim'
 
 ### `加强版状态栏`
 ```
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-# 设置主题
 let g:airline_theme='papercolor'
 ```
 - [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
@@ -244,7 +263,7 @@ let g:airline_theme='papercolor'
 
 ### `代码注释`
 ```
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 # <leader>cc // 注释
 # <leader>cm 只用一组符号注释
@@ -256,11 +275,8 @@ Plugin 'scrooloose/nerdcommenter'
 # <leader>ca 切换　// 和 /* */
 # <leader>cu 取消注释
 
-# 注释符号与注释内容之间空一格
 let g:NERDSpaceDelims = 1
-# 注释向左对齐
 let g:NERDDefaultAlign = 'left'
-# 自定义注释格式
 let g:NERDCustomDelimiters = {
 			\ 'javascript': { 'left': '//', 'leftAlt': '/**', 'rightAlt': '*/' },
 			\ 'less': { 'left': '/**', 'right': '*/' }
@@ -270,27 +286,25 @@ let g:NERDCustomDelimiters = {
 
 ### `git`
 ```
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 ```
 - [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+- [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 
 ### `Markdown`
 ```
-Plugin 'suan/vim-instant-markdown'
-[sudo] npm -g install instant-markdown-d
+Plug 'suan/vim-instant-markdown'
 
-# 保存后打开
 let g:instant_markdown_slow = 1
-# 默认不打开
 let g:instant_markdown_autostart = 0
-# 打开
-:InstantMarkdownPreview
+# :InstantMarkdownPreview
 ```
 - [suan/vim-instant-markdown](https://github.com/suan/vim-instant-markdown)
 
 ### `Emmet`
 ```
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
@@ -303,14 +317,14 @@ let g:user_emmet_settings = {
 
 ### `html 5`
 ```
-Plugin 'othree/html5.vim'
+Plug 'othree/html5.vim'
 ```
 - [othree/html5.vim](https://github.com/othree/html5.vim)
 
 ### `css 3`
 ```
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'ap/vim-css-color'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
 
 augroup VimCSS3Syntax
   autocmd!
@@ -323,7 +337,7 @@ augroup END
 
 ### `JavaScipt`
 ```
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
@@ -347,7 +361,7 @@ set conceallevel=1
 
 ### `React`
 ```
-Plugin 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
 
 let g:jsx_ext_required = 0
 ```
@@ -355,11 +369,10 @@ let g:jsx_ext_required = 0
 
 ### `Prettier`
 ```
-Plugin 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier'
 ```
 - [prettier/vim-prettier](https://github.com/prettier/vim-prettier)
 
 # 配置文件
 - [.vimrc](./.vimrc)
-- [.vimrc.bundles](./.vimrc.bundles)
 

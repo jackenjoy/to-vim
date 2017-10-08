@@ -1,23 +1,10 @@
 
 "==========================================
-" 加载插件
-"==========================================
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-
-
-
-
-
-
-"==========================================
 " 基本设置
 "==========================================
 " 取消备份
 set nobackup
 set noswapfile
-
 
 " 设置文件编码为 UTF-8
 set encoding=utf-8
@@ -30,9 +17,6 @@ set encoding=utf-8
 "==========================================
 "  显示设置
 "==========================================
-" 是否显示隐藏文件
-let NERDTreeShowHidden=1
-
 " 显示行号
 set number
 
@@ -54,9 +38,212 @@ set showmode
 " 启动 vim 时关闭折叠代码
 set nofoldenable
 
-let g:nerdtree_tabs_open_on_console_startup=1
-
 " 主题
 syntax enable
 set background=dark
+colorscheme solarized
+
+
+
+
+
+
+"==========================================
+" vim-plug
+"==========================================
+
+call plug#begin('~/.vim/plugged')                                                                     
+
+" -----------------------------------------------
+" 树形目录
+" -----------------------------------------------
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let g:NERDTreeShowIgnoredStatus = 1
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+
+
+" -----------------------------------------------
+" 代码，引号，路径自动补全
+" -----------------------------------------------
+Plug 'Valloric/YouCompleteMe'
+Plug 'Raimondi/delimitMate'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+
+
+" -----------------------------------------------
+" 语法高亮，检查
+" -----------------------------------------------
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+Plug 'sheerun/vim-polyglot'
+Plug 'w0rp/ale', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
+\ }
+
+let g:ale_fixers = {
+\	'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '▶'
+
+
+
+" -----------------------------------------------
+" 文件，代码搜索
+" -----------------------------------------------
+Plug 'rking/ag.vim'
+Plug 'kien/ctrlp.vim'
+
+
+
+" -----------------------------------------------
+" 加强版状态条
+" -----------------------------------------------
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+let g:airline_theme='papercolor'
+
+
+
+" -----------------------------------------------
+" 代码注释
+" -----------------------------------------------
+Plug 'scrooloose/nerdcommenter'
+
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCustomDelimiters = {
+			\ 'javascript': { 'left': '//', 'leftAlt': '/**', 'rightAlt': '*/' },
+			\ 'less': { 'left': '/**', 'right': '*/' }
+		\ }
+
+
+
+
+" -----------------------------------------------
+" git
+" -----------------------------------------------
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+
+
+" -----------------------------------------------
+" Vim Markdown
+" -----------------------------------------------
+Plug 'suan/vim-instant-markdown'
+
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+
+
+
+" -----------------------------------------------
+" Emmet
+" -----------------------------------------------
+Plug 'mattn/emmet-vim'
+
+let g:user_emmet_leader_key='<C-Z>'
+let g:user_emmet_settings = {
+ 		\ 'javascript.jsx' : {
+    		\ 'extends' : 'jsx',
+    	\ },
+ 		\ }
+
+
+
+" -----------------------------------------------
+" html5
+" -----------------------------------------------
+Plug 'othree/html5.vim'
+
+
+
+
+" -----------------------------------------------
+" css3
+" -----------------------------------------------
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
+
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
+
+
+
+" -----------------------------------------------
+" JavaScript
+" -----------------------------------------------
+Plug 'pangloss/vim-javascript'
+
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+set foldmethod=syntax
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+let g:javascript_conceal_noarg_arrow_function = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
+set conceallevel=1
+
+
+
+
+" -----------------------------------------------
+" React
+" -----------------------------------------------
+Plug 'mxw/vim-jsx'
+
+let g:jsx_ext_required = 0
+
+
+
+
+
+call plug#end()
+
+" PlugInstall
+" PlugUpdate
+" PlugClean
+" PlugUpgrade
+" PlugStatus
+" PlugDiff
+" PlugSnapshot
+
+
 
