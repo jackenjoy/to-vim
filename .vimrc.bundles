@@ -38,13 +38,45 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 autocmd vimenter * NERDTree		" 自动打开 vim
 map <C-n> :NERDTreeToggle<CR>		" 打开关闭 vim
+let g:NERDTreeShowIgnoredStatus = 1
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
 
 
 " -----------------------------------------------
-" 代码，引号自动补全
+" 代码，引号，路径自动补全
 " -----------------------------------------------
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+
+" -----------------------------------------------
+" 语法高亮，检查
+" -----------------------------------------------
+Plugin 'prettier/vim-prettier'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'w0rp/ale', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
+\ }
+let g:ale_fixers = {
+\	'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '▶'
 
 
 
@@ -66,9 +98,25 @@ let g:airline_theme='papercolor'
 
 
 " -----------------------------------------------
+" 代码注释
+" -----------------------------------------------
+Plugin 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1	" 注释符号与注释内容之间空一格
+let g:NERDDefaultAlign = 'left'	" 注释向左对齐
+" 自定义注释格式
+let g:NERDCustomDelimiters = {
+			\ 'javascript': { 'left': '//', 'leftAlt': '/**', 'rightAlt': '*/' },
+			\ 'less': { 'left': '/**', 'right': '*/' }
+		\ }
+
+
+
+
+" -----------------------------------------------
 " git
 " -----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
+
 
 
 
@@ -82,16 +130,15 @@ let g:instant_markdown_autostart = 0	" 默认不打开
 
 
 " -----------------------------------------------
-" 代码注释
+" Emmet
 " -----------------------------------------------
-Plugin 'scrooloose/nerdcommenter'
-let g:NERDSpaceDelims = 1	" 注释符号与注释内容之间空一格
-let g:NERDDefaultAlign = 'left'	" 注释向左对齐
-" 自定义注释格式
-let g:NERDCustomDelimiters = {
-			\ 'javascript': { 'left': '//', 'leftAlt': '/**', 'rightAlt': '*/' },
-			\ 'less': { 'left': '/**', 'right': '*/' }
-		\ }
+Plugin 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+ 		\ 'javascript.jsx' : {
+    		\ 'extends' : 'jsx',
+    	\ },
+ 		\ }
 
 
 
@@ -147,24 +194,9 @@ let g:jsx_ext_required = 0
 
 
 
-" -----------------------------------------------
-" Emmet
-" -----------------------------------------------
-Plugin 'mattn/emmet-vim'
-let g:user_emmet_leader_key='<Tab>'
-let g:user_emmet_settings = {
- 		\ 'javascript.jsx' : {
-    		\ 'extends' : 'jsx',
-    	\ },
- 		\ }
 
 
 
-
-" -----------------------------------------------
-" polyglot
-" -----------------------------------------------
-Plugin 'sheerun/vim-polyglot'
 
 
 

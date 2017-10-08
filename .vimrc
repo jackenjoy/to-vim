@@ -59,13 +59,4 @@ let g:nerdtree_tabs_open_on_console_startup=1
 " 主题
 syntax enable
 set background=dark
-colorscheme solarized
-
-
-
-
-
-
-
-
 

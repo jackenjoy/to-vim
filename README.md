@@ -156,8 +156,8 @@ syntax enable
 set background=dark
 colorscheme solarized
 ```
-[altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)
-[Anthony25/gnome-terminal-colors-solarized](https://github.com/Anthony25/gnome-terminal-colors-solarized)
+- [altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)
+- [Anthony25/gnome-terminal-colors-solarized](https://github.com/Anthony25/gnome-terminal-colors-solarized)
 
 ## .vimrc.bundles
 ```
@@ -193,25 +193,43 @@ map <C-n> :NERDTreeToggle<CR>
 # gT      前一个 tab
 # gt      后一个 tab
 ```
-[scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
+- [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 
-
-### `代码，引号自动补全`
+### `代码，引号，路径自动补全`
 ```
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 ```
-[Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
-[Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
+- [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+- [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
+- [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
+
+### `语法高亮，检查`
+```
+Plugin 'sheerun/vim-polyglot'
+Plugin 'w0rp/ale', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
+\ }
+let g:ale_fixers = {
+\	'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '▶'
+```
+- [w0rp/ale](https://github.com/w0rp/ale)
+- [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)
 
 ### `文件，代码搜索`
 ```
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 ```
-[kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
-[ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
-[rking/ag.vim](https://github.com/rking/ag.vim)
+- [kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
+- [ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
+- [rking/ag.vim](https://github.com/rking/ag.vim)
 
 ### `加强版状态栏`
 ```
@@ -221,28 +239,8 @@ Plugin 'vim-airline/vim-airline-themes'
 # 设置主题
 let g:airline_theme='papercolor'
 ```
-[vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
-[vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
-
-### `git`
-```
-Plugin 'airblade/vim-gitgutter'
-```
-[airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
-
-### `Markdown`
-```
-Plugin 'suan/vim-instant-markdown'
-[sudo] npm -g install instant-markdown-d
-
-# 保存后打开
-let g:instant_markdown_slow = 1
-# 默认不打开
-let g:instant_markdown_autostart = 0
-# 打开
-:InstantMarkdownPreview
-```
-[suan/vim-instant-markdown](https://github.com/suan/vim-instant-markdown)
+- [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
+- [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
 
 ### `代码注释`
 ```
@@ -268,13 +266,46 @@ let g:NERDCustomDelimiters = {
 			\ 'less': { 'left': '/**', 'right': '*/' }
 		\ }
 ```
-[scrooloose/nerdcommenter](https://github.com/scrooloose/nerdcommenter)
+- [scrooloose/nerdcommenter](https://github.com/scrooloose/nerdcommenter)
+
+### `git`
+```
+Plugin 'airblade/vim-gitgutter'
+```
+- [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+
+### `Markdown`
+```
+Plugin 'suan/vim-instant-markdown'
+[sudo] npm -g install instant-markdown-d
+
+# 保存后打开
+let g:instant_markdown_slow = 1
+# 默认不打开
+let g:instant_markdown_autostart = 0
+# 打开
+:InstantMarkdownPreview
+```
+- [suan/vim-instant-markdown](https://github.com/suan/vim-instant-markdown)
+
+### `Emmet`
+```
+Plugin 'mattn/emmet-vim'
+
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+ 		\ 'javascript.jsx' : {
+    		\ 'extends' : 'jsx',
+    	\ },
+ 		\ }
+```
+- [mattn/emmet-vim](https://github.com/mattn/emmet-vim)
 
 ### `html 5`
 ```
 Plugin 'othree/html5.vim'
 ```
-[othree/html5.vim](https://github.com/othree/html5.vim)
+- [othree/html5.vim](https://github.com/othree/html5.vim)
 
 ### `css 3`
 ```
@@ -287,8 +318,8 @@ augroup VimCSS3Syntax
   autocmd FileType css setlocal iskeyword+=-
 augroup END
 ```
-[hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
-[ap/vim-css-color](https://github.com/ap/vim-css-color)
+- [hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
+- [ap/vim-css-color](https://github.com/ap/vim-css-color)
 
 ### `JavaScipt`
 ```
@@ -312,7 +343,7 @@ let g:javascript_conceal_noarg_arrow_function = "🞅"
 let g:javascript_conceal_underscore_arrow_function = "🞅"
 set conceallevel=1
 ```
-[pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)
+- [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)
 
 ### `React`
 ```
@@ -320,21 +351,15 @@ Plugin 'mxw/vim-jsx'
 
 let g:jsx_ext_required = 0
 ```
-[mxw/vim-jsx](https://github.com/mxw/vim-jsx)
+- [mxw/vim-jsx](https://github.com/mxw/vim-jsx)
 
-### `Emmet`
+### `Prettier`
 ```
-Plugin 'mattn/emmet-vim'
-
-let g:user_emmet_leader_key='<Tab>'
-let g:user_emmet_settings = {
- 		\ 'javascript.jsx' : {
-    		\ 'extends' : 'jsx',
-    	\ },
- 		\ }
+Plugin 'prettier/vim-prettier'
 ```
-[mattn/emmet-vim](https://github.com/mattn/emmet-vim)
+- [prettier/vim-prettier](https://github.com/prettier/vim-prettier)
 
-### 配置文件
-* [.vimrc](./.vimrc)
-* [.vimrc.bundles](./.vimrc.bundles)
+# 配置文件
+- [.vimrc](./.vimrc)
+- [.vimrc.bundles](./.vimrc.bundles)
+
