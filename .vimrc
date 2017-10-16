@@ -102,10 +102,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " 语法高亮，检查
 " -----------------------------------------------
 Plug 'sheerun/vim-polyglot'
-Plug 'w0rp/ale', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
-\ }
+Plug 'w0rp/ale'
 
 let g:ale_fixers = {
 \	'javascript': ['eslint'],
