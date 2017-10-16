@@ -26,13 +26,21 @@ set nowrap
 " 显示光标当前位置
 set ruler
 
-" 设置缩进的宽度
+" 设置缩进
+set cindent
+
 set tabstop=2
+set shiftwidth=2
 
 " 突出显示当前行
 set cursorline
 
-" 左下角显示当前vim模式
+" 查找
+set ic
+set hls
+set is
+
+" 左下角显示当前 vim 模式
 set showmode
 
 " 启动 vim 时关闭折叠代码
@@ -93,9 +101,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " -----------------------------------------------
 " 语法高亮，检查
 " -----------------------------------------------
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale', {
   \ 'do': 'yarn install',
@@ -233,6 +238,19 @@ let g:jsx_ext_required = 0
 
 
 
+" -----------------------------------------------
+" Prettier
+" -----------------------------------------------
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+
+  
+  
 
 
 call plug#end()
