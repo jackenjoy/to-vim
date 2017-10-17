@@ -7,11 +7,15 @@
 ```
 sudo apt-get install vim  // Ubuntu
 ```
+其他平台，可以自行谷歌
 
 # 新手指南
 ```
 vimtutor  // vim 教程
 ```
+上面是史上最简单，最全面的 `Vim` 基础教程，至今无人超越
+
+下面是作者基于上面的归纳
 
 ## `移动光标`
 ```
@@ -39,7 +43,7 @@ vimtutor  // vim 教程
 # x 删除当前字符
 # dw 删除至当前单词末尾
 # de 删除至当前单词末尾，包括当前字符
-# d$ 删除当前行尾
+# d$ 删除至当前行尾
 # dd 删除整行
 # 2dd 删除两行
 ```
@@ -54,7 +58,7 @@ vimtutor  // vim 教程
 
 ## `撤销`
 ```
-# 撤销
+# u 撤销
 # <ctrl>+r 取消撤销
 ```
 
@@ -96,6 +100,7 @@ vimtutor  // vim 教程
 ```
 
 # .vimrc
+`.vimrc` 是 `Vim` 的配置文件，需要我们自己创建
 ```
 cd Home               // 进入 Home 目录
 touch .vimrc          // 配置文件
@@ -109,6 +114,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
+其他平台，可以查看 [vim-plug](https://github.com/junegunn/vim-plug)
 
 ## 基本配置
 ### `取消备份`
@@ -137,9 +143,12 @@ set nowrap
 set ruler
 ```
 
-### `设置缩进的宽度`
+### `设置缩进`
 ```
+set cindent
+
 set tabstop=2
+set shiftwidth=2
 ```
 
 ### `突出显示当前行`
@@ -147,7 +156,14 @@ set tabstop=2
 set cursorline
 ```
 
-### `左下角显示当前vim模式`
+### `查找`
+```
+set ic
+set hls
+set is
+```
+
+### `左下角显示当前 vim 模式`
 ```
 set showmode
 ```
@@ -198,7 +214,13 @@ let g:NERDTreeIndicatorMapCustom = {
 # T 在标签页中打开，但光标仍然留在 NERDTree
 # r 刷新光标所在的目录
 # R 刷新当前根路径
+# X 收起所有目录
+# p 小写，跳转到光标所在的上一级路径
+# P 大写，跳转到当前根路径
+# J 到第一个节点
+# K 到最后一个节点
 # I 显示隐藏文件
+# m 显示文件操作菜单
 # C 将根路径设置为光标所在的目录
 # u 设置上级目录为根路径
 # ctrl + w + w 光标自动在左右侧窗口切换
@@ -214,7 +236,7 @@ let g:NERDTreeIndicatorMapCustom = {
 - [vim-nerdtree-tabs](https://github.com/jistr/vim-nerdtree-tabs)
 - [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin)
 
-### `代码，引号，路径自动补全`
+### `代码，引号，路径补全`
 ```
 Plug 'Valloric/YouCompleteMe'
 Plug 'Raimondi/delimitMate'
@@ -227,15 +249,12 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 ### `语法高亮，检查`
 ```
 Plug 'sheerun/vim-polyglot'
-Plug 'w0rp/ale', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
-\ }
+Plug 'w0rp/ale'
 
 let g:ale_fixers = {
 \	'javascript': ['eslint'],
 \}
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '▶'
 ```
@@ -322,6 +341,7 @@ Plug 'othree/html5.vim'
 - [othree/html5.vim](https://github.com/othree/html5.vim)
 
 ### `css 3`
+![][7]
 ```
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -369,9 +389,18 @@ let g:jsx_ext_required = 0
 
 ### `Prettier`
 ```
-Plug 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+
+# :Prettier
 ```
 - [prettier/vim-prettier](https://github.com/prettier/vim-prettier)
+
 
 # 配置文件
 - [.vimrc](./.vimrc)
